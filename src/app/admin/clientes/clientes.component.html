@@ -1,0 +1,72 @@
+<div>
+  <h1>Listado de Clientes</h1>
+  <hr />
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" routerLink="/cliente/nuevo">
+        Agregar Cliente
+      </button>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <p>Promedio de edades:</p>
+        </div>
+        <div class="col">
+          <input type="number" size="4" name ="promedio" value="{{promedio}}"/>
+        </div>
+      </div>
+    </div><div class="col">
+      <div class="row">
+        <div class="col">
+          <p>Desviacion estandar de edades:</p>
+        </div>
+        <div class="col">
+          <input type="number" size="4"   name ="desviacion" value="{{desviacion}}"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table mt-3">
+  <table class="table table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col ">#</th>
+        <th scope="col ">Nombre</th>
+        <th scope="col ">Apellido</th>
+        <th scope="col ">Edad</th>
+        <th scope="col ">Fecha de Nacimiento</th>
+        <th scope="col ">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes; let i = index">
+        <th scope="row ">{{ i + 1 }}</th>
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.apellido }}</td>
+        <td>{{ cliente.edad }}</td>
+        <td>{{ cliente.fecha_nacimiento }}</td>
+        <td>
+          <button
+            [routerLink]="['/cliente', cliente.id]"
+            class="btn btn-info mr-1"
+          >
+            Actualizar
+          </button>
+          <button
+            (click)="eliminar_cliente(cliente, i)"
+            class="btn btn-danger mr-1"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="clientes.length == 0" class="alert alert-warning text-center mt-3">
+  <h4>No hay Clientes por ahora ...</h4>
+</div>
